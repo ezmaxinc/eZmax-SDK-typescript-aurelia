@@ -19,9 +19,9 @@ import {
 } from './models';
 
 /**
- * objectActivesessionGetCurrent1 - parameters interface
+ * objectActivesessionGetCurrentV1 - parameters interface
  */
-export interface IObjectActivesessionGetCurrent1Params {
+export interface IObjectActivesessionGetCurrentV1Params {
 }
 
 /**
@@ -44,7 +44,7 @@ export class ObjectActivesessionApi extends Api {
    * Get Current Activesession
    * Todo Description
    */
-  async objectActivesessionGetCurrent1(): Promise<ObjectActivesessionGetCurrentV1Response> {
+  async objectActivesessionGetCurrentV1(): Promise<ObjectActivesessionGetCurrentV1Response> {
     // Verify required parameters are set
 
     // Create URL to call
