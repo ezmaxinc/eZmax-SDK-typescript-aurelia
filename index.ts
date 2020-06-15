@@ -12,7 +12,7 @@
 
 export { Api } from './Api';
 export { AuthStorage } from './AuthStorage';
-export { DefaultApi } from './DefaultApi';
+export { ObjectActivesessionApi } from './ObjectActivesessionApi';
 export {
   GenericResponse,
   GenericResponseObjDebug,

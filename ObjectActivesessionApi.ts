@@ -19,19 +19,19 @@ import {
 } from './models';
 
 /**
- * testOperationID - parameters interface
+ * objectActivesessionGetCurrent1 - parameters interface
  */
-export interface ITestOperationIDParams {
+export interface IObjectActivesessionGetCurrent1Params {
 }
 
 /**
- * DefaultApi - API class
+ * ObjectActivesessionApi - API class
  */
 @autoinject()
-export class DefaultApi extends Api {
+export class ObjectActivesessionApi extends Api {
 
   /**
-   * Creates a new DefaultApi class.
+   * Creates a new ObjectActivesessionApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.
@@ -44,7 +44,7 @@ export class DefaultApi extends Api {
    * Get Current Activesession
    * Todo Description
    */
-  async testOperationID(): Promise<ObjectActivesessionGetCurrentV1Response> {
+  async objectActivesessionGetCurrent1(): Promise<ObjectActivesessionGetCurrentV1Response> {
     // Verify required parameters are set
 
     // Create URL to call
