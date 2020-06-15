@@ -25,13 +25,13 @@ export interface ITestOperationIDParams {
 }
 
 /**
- * ActivesessionApi - API class
+ * DefaultApi - API class
  */
 @autoinject()
-export class ActivesessionApi extends Api {
+export class DefaultApi extends Api {
 
   /**
-   * Creates a new ActivesessionApi class.
+   * Creates a new DefaultApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.

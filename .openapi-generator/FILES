@@ -1,8 +1,8 @@
 .gitignore
 .openapi-generator-ignore
-ActivesessionApi.ts
 Api.ts
 AuthStorage.ts
+DefaultApi.ts
 README.md
 git_push.sh
 index.ts
