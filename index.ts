@@ -1,6 +1,6 @@
 /**
  * eZmax API Definition
- * TODO Api description.
+ * This API expose all the functionnalities for the eZmax and eZsign application.  We provide SDKs for customers. They are generated using OpenAPI codegen, we encourage customers to use them as we also provide samples for them.  You can choose to build your own implementation manually or can use any compatible OpenAPI 3.0 generator like Swagger Codegen, OpenAPI codegen or any commercial generators.  If you need helping understanding how to use this API, don\'t waste too much time looging for it. Contact support-api@ezmax.ca, we\'re here to help. We are developpers so we know programmers don\'t like bad documentation. If you don\'t find what you need in the documentation, let us know, we\'ll improve it and put you rapidly up on track.
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: support-api@ezmax.ca
@@ -12,12 +12,23 @@
 
 export { Api } from './Api';
 export { AuthStorage } from './AuthStorage';
-export { ObjectActivesessionApi } from './ObjectActivesessionApi';
+export { ActivesessionApi } from './ActivesessionApi';
+export { EzsignfolderApi } from './EzsignfolderApi';
 export {
+  ActivesessionGetCurrentV1Response,
+  ActivesessionGetCurrentV1ResponseMPayload,
+  EzsignfolderCompoundRequest,
+  EzsignfolderCreateObjectV1Request,
+  EzsignfolderCreateObjectV1Response,
+  EzsignfolderCreateObjectV1ResponseMPayload,
+  EzsignfolderDeleteObjectV1Response,
+  EzsignfolderEditObjectV1Request,
+  EzsignfolderEditObjectV1Response,
+  EzsignfolderGetObjectV1Response,
+  EzsignfolderRequest,
   GenericResponse,
+  GenericResponseError,
   GenericResponseObjDebug,
   GenericResponseObjDebugPayload,
   GenericResponseObjSQLQuery,
-  ObjectActivesessionGetCurrentV1Response,
-  ObjectActivesessionGetCurrentV1ResponseMPayload,
 } from './models';

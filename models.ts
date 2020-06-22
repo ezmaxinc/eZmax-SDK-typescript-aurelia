@@ -1,6 +1,6 @@
 /**
  * eZmax API Definition
- * TODO Api description.
+ * This API expose all the functionnalities for the eZmax and eZsign application.  We provide SDKs for customers. They are generated using OpenAPI codegen, we encourage customers to use them as we also provide samples for them.  You can choose to build your own implementation manually or can use any compatible OpenAPI 3.0 generator like Swagger Codegen, OpenAPI codegen or any commercial generators.  If you need helping understanding how to use this API, don\'t waste too much time looging for it. Contact support-api@ezmax.ca, we\'re here to help. We are developpers so we know programmers don\'t like bad documentation. If you don\'t find what you need in the documentation, let us know, we\'ll improve it and put you rapidly up on track.
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: support-api@ezmax.ca
@@ -12,7 +12,150 @@
 
 
 /**
- * All API response will inherit this based Response.
+ * Response for the /1/object/activesession/getCurrent API Request
+ */
+export interface ActivesessionGetCurrentV1Response extends GenericResponse {
+  mPayload: ActivesessionGetCurrentV1ResponseMPayload;
+}
+
+
+/**
+ * Payload for the /1/object/activesession/getCurrent API Request
+ */
+export interface ActivesessionGetCurrentV1ResponseMPayload {
+  /**
+   * The customer code specific to the client in which the API request is being made
+   */
+  sCustomerCode: string;
+  /**
+   * The type of session used for the API request call
+   */
+  eActivesessionSessiontype: ActivesessionGetCurrentV1ResponseMPayloadEActivesessionSessiontypeEnum;
+  /**
+   * The ID of the language, Valid values are: 1. French 2. English
+   */
+  fkiLanguageID: number;
+  /**
+   * The name of the active Company in the current language
+   */
+  sCompanyNameX: string;
+  /**
+   * The name of the active Department in the current language
+   */
+  sDepartmentNameX: string;
+  /**
+   * An Array of Registered modules.  These are the modules that are Licensed to be used by the User or the API Key.
+   */
+  a_RegisteredModules: Array<string>;
+  /**
+   * An array of permissions granted to the user or api key
+   */
+  a_Permissions: Array<number>;
+}
+
+/**
+ * Enum for the eActivesessionSessiontype property.
+ */
+export type ActivesessionGetCurrentV1ResponseMPayloadEActivesessionSessiontypeEnum = 'Normal';
+
+
+/**
+ * An Ezsignfolder Object and children to create a complete structure
+ */
+export interface EzsignfolderCompoundRequest extends EzsignfolderRequest {
+}
+
+
+/**
+ * Request for the /1/object/ezsignfolder/createObject API Request
+ */
+export interface EzsignfolderCreateObjectV1Request {
+  objEzsignfolder?: EzsignfolderRequest;
+  objEzsignfolderCompound?: EzsignfolderCompoundRequest;
+}
+
+
+/**
+ * Response for the /1/object/ezsignfolder/createObject API Request
+ */
+export interface EzsignfolderCreateObjectV1Response extends GenericResponse {
+  mPayload: EzsignfolderCreateObjectV1ResponseMPayload;
+}
+
+
+/**
+ * Payload for the /1/object/ezsignfolder/editObject API Request
+ */
+export interface EzsignfolderCreateObjectV1ResponseMPayload {
+  /**
+   * An array of unique IDs representing the object that were requested to be created.  They are returned in the same order as the array containing the objects to be created that was sent in the request.
+   */
+  a_pkiEzsignfolderID: Array<number>;
+}
+
+
+/**
+ * Response for the /1/object/ezsignfolder/deleteObject API Request
+ */
+export interface EzsignfolderDeleteObjectV1Response extends GenericResponse {
+}
+
+
+/**
+ * Request for the /1/object/ezsignfolder/editObject API Request
+ */
+export interface EzsignfolderEditObjectV1Request {
+  objEzsignfolder?: EzsignfolderRequest;
+}
+
+
+/**
+ * Response for the /1/object/ezsignfolder/editObject API Request
+ */
+export interface EzsignfolderEditObjectV1Response extends GenericResponse {
+}
+
+
+/**
+ * Response for the /1/object/ezsignfolder/getObject API Request
+ */
+export interface EzsignfolderGetObjectV1Response extends GenericResponse {
+  /**
+   * Payload for the /1/object/ezsignfolder/getObject API Request
+   */
+  mPayload: object;
+}
+
+
+/**
+ * An Ezsignfolder Object
+ */
+export interface EzsignfolderRequest {
+  /**
+   * The Ezsign Folder Type ID. This value can be queried by the API and is also visible in the admin interface.  There are two types of Ezsignfoldertype. **User** and **Shared**. **User** can only be seen by the user who created the folder or its assistants. Access to **Shared** folders are configurable for access and email delivery. You should typically choose a **Shared** type here.
+   */
+  fkiEzsignfoldertypeID: number;
+  /**
+   * The ID of the language, Valid values are: 1. French 2. English
+   */
+  fkiLanguageID: number;
+  /**
+   * The description of the Ezsign Folder
+   */
+  sEzsignfolderDescription: string;
+  /**
+   * Somes extra notes about the eZsign Folder
+   */
+  tEzsignfolderNote: string;
+  /**
+   * Determine if a Time Stamping Authority should add a timestamp on each of the signature. Valid values are: 1. No. No TSA Timestamping will requested. This will make all signatures a lot faster since no round-trip to the TSA server will be required. Timestamping will be made using eZsign server\'s time. 2. Best effort. Timestamping from a Time Stamping Authority will be requested but is not mandatory. In the very improbable case it cannot be completed, the timestamping will be made using eZsign server\'s time. **Additional fee applies** 3. Mandatory. Timestamping from a Time Stamping Authority will be requested and is mandatory. In the very improbable case it cannot be completed, the signature will fail and the user will be asked to retry. **Additional fee applies** 
+   */
+  fkiEzsigntsarequirementID: number;
+}
+
+
+/**
+ * All API response will inherit this based Response
  */
 export interface GenericResponse {
   objDebugPayload?: GenericResponseObjDebugPayload;
@@ -21,42 +164,53 @@ export interface GenericResponse {
 
 
 /**
- * This is a generic debug object that is returned by all API requests.
+ * Generic Error Message
  */
-export interface GenericResponseObjDebug {
+export interface GenericResponseError {
   /**
-   * The peak memory allocated during the API request execution. Formatted as a human readable string.
+   * More detail about the error
    */
-  sMemoryUsage: string;
-  /**
-   * The total server execution time of the API request execution. Formatted as a human readable string.
-   */
-  sRunTime: string;
-  /**
-   * The number of SQL SELECT queries that were sent to the database server during the API request execution.
-   */
-  iSQLSelects: number;
-  /**
-   * The number of SQL INSERT/UPDATE/DELETE queries that were sent to the database server during the API request execution.
-   */
-  iSQLQueries: number;
-  /**
-   * An array of the SQL Queries that were executed during the API request execution.
-   */
-  a_objQuery: Array<GenericResponseObjSQLQuery>;
+  sErrorMessage: string;
 }
 
 
 /**
- * This is a debug object containing debugging information on the actual function.
+ * This is a generic debug object that is returned by all API requests
+ */
+export interface GenericResponseObjDebug {
+  /**
+   * The peak memory allocated during the API request execution. Formatted as a human readable string
+   */
+  sMemoryUsage: string;
+  /**
+   * The total server execution time of the API request execution. Formatted as a human readable string
+   */
+  sRunTime: string;
+  /**
+   * The number of SQL SELECT queries that were sent to the database server during the API request execution
+   */
+  iSQLSelects: number;
+  /**
+   * The number of SQL INSERT/UPDATE/DELETE queries that were sent to the database server during the API request execution
+   */
+  iSQLQueries: number;
+  /**
+   * An array of the SQL Queries that were executed during the API request execution
+   */
+  a_objSQLQuery: Array<GenericResponseObjSQLQuery>;
+}
+
+
+/**
+ * This is a debug object containing debugging information on the actual function
  */
 export interface GenericResponseObjDebugPayload {
   /**
-   * The minimum version of the function that can be called.
+   * The minimum version of the function that can be called
    */
   iVersionMin: number;
   /**
-   * The maximum version of the function that can be called.
+   * The maximum version of the function that can be called
    */
   iVersionMax: number;
   /**
@@ -67,7 +221,7 @@ export interface GenericResponseObjDebugPayload {
 
 
 /**
- * Definition of objSQLQuery Object.
+ * Definition of objSQLQuery Object
  */
 export interface GenericResponseObjSQLQuery {
   /**
@@ -75,56 +229,8 @@ export interface GenericResponseObjSQLQuery {
    */
   sQuery: string;
   /**
-   * Execution time of the SQL Query in seconds.
+   * Execution time of the SQL Query in seconds
    */
   fDuration: number;
 }
-
-
-/**
- * Response for the /1/object/activesession/getCurrent API Request.
- */
-export interface ObjectActivesessionGetCurrentV1Response extends GenericResponse {
-  mPayload: ObjectActivesessionGetCurrentV1ResponseMPayload;
-}
-
-
-/**
- * Payload for the /1/object/activesession/getCurrent API Request.
- */
-export interface ObjectActivesessionGetCurrentV1ResponseMPayload {
-  /**
-   * The customer code specific to the client in which the API request is being made.
-   */
-  sCustomerCode: string;
-  /**
-   * The type of session used for the API request call.
-   */
-  eActivesessionSessiontype: ObjectActivesessionGetCurrentV1ResponseMPayloadEActivesessionSessiontypeEnum;
-  /**
-   * The ID of the language, Valid values are: 1. French 2. English
-   */
-  fkiLanguageID: number;
-  /**
-   * The name of the active Company in the current language.
-   */
-  sCompanyNameX: string;
-  /**
-   * The name of the active Department in the current language.
-   */
-  sDepartmentNameX: string;
-  /**
-   * An Array of Registered modules.  These are the modules that are Licensed to be used by the User or the API Key.
-   */
-  a_RegisteredModules: Array<string>;
-  /**
-   * An array of permissions granted to the user or api key. 
-   */
-  a_Permissions: Array<number>;
-}
-
-/**
- * Enum for the eActivesessionSessiontype property.
- */
-export type ObjectActivesessionGetCurrentV1ResponseMPayloadEActivesessionSessiontypeEnum = 'Normal';
 

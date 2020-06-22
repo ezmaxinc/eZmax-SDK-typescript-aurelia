@@ -1,6 +1,6 @@
 /**
  * eZmax API Definition
- * TODO Api description.
+ * This API expose all the functionnalities for the eZmax and eZsign application.  We provide SDKs for customers. They are generated using OpenAPI codegen, we encourage customers to use them as we also provide samples for them.  You can choose to build your own implementation manually or can use any compatible OpenAPI 3.0 generator like Swagger Codegen, OpenAPI codegen or any commercial generators.  If you need helping understanding how to use this API, don\'t waste too much time looging for it. Contact support-api@ezmax.ca, we\'re here to help. We are developpers so we know programmers don\'t like bad documentation. If you don\'t find what you need in the documentation, let us know, we\'ll improve it and put you rapidly up on track.
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: support-api@ezmax.ca
@@ -15,23 +15,23 @@ import { HttpClient } from 'aurelia-http-client';
 import { Api } from './Api';
 import { AuthStorage } from './AuthStorage';
 import {
-  ObjectActivesessionGetCurrentV1Response,
+  ActivesessionGetCurrentV1Response,
 } from './models';
 
 /**
- * objectActivesessionGetCurrentV1 - parameters interface
+ * activesessionGetCurrentV1 - parameters interface
  */
-export interface IObjectActivesessionGetCurrentV1Params {
+export interface IActivesessionGetCurrentV1Params {
 }
 
 /**
- * ObjectActivesessionApi - API class
+ * ActivesessionApi - API class
  */
 @autoinject()
-export class ObjectActivesessionApi extends Api {
+export class ActivesessionApi extends Api {
 
   /**
-   * Creates a new ObjectActivesessionApi class.
+   * Creates a new ActivesessionApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.
@@ -42,9 +42,9 @@ export class ObjectActivesessionApi extends Api {
 
   /**
    * Get Current Activesession
-   * Todo Description
+   * Retrieve the details about the current activesession
    */
-  async objectActivesessionGetCurrentV1(): Promise<ObjectActivesessionGetCurrentV1Response> {
+  async activesessionGetCurrentV1(): Promise<ActivesessionGetCurrentV1Response> {
     // Verify required parameters are set
 
     // Create URL to call

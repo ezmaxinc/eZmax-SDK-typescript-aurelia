@@ -1,8 +1,9 @@
 .gitignore
 .openapi-generator-ignore
+ActivesessionApi.ts
 Api.ts
 AuthStorage.ts
-ObjectActivesessionApi.ts
+EzsignfolderApi.ts
 README.md
 git_push.sh
 index.ts
