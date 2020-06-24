@@ -17,7 +17,6 @@ export { EzsignfolderApi } from './EzsignfolderApi';
 export {
   ActivesessionGetCurrentV1Response,
   ActivesessionGetCurrentV1ResponseMPayload,
-  CommonEObjectType,
   CommonResponse,
   CommonResponseError,
   CommonResponseObjDebug,
