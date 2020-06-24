@@ -17,6 +17,12 @@ export { EzsignfolderApi } from './EzsignfolderApi';
 export {
   ActivesessionGetCurrentV1Response,
   ActivesessionGetCurrentV1ResponseMPayload,
+  CommonEObjectType,
+  CommonResponse,
+  CommonResponseError,
+  CommonResponseObjDebug,
+  CommonResponseObjDebugPayload,
+  CommonResponseObjSQLQuery,
   EzsignfolderCompoundRequest,
   EzsignfolderCreateObjectV1Request,
   EzsignfolderCreateObjectV1Response,
@@ -26,9 +32,4 @@ export {
   EzsignfolderEditObjectV1Response,
   EzsignfolderGetObjectV1Response,
   EzsignfolderRequest,
-  GenericResponse,
-  GenericResponseError,
-  GenericResponseObjDebug,
-  GenericResponseObjDebugPayload,
-  GenericResponseObjSQLQuery,
 } from './models';

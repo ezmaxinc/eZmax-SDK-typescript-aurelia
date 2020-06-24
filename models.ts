@@ -14,7 +14,7 @@
 /**
  * Response for the /1/object/activesession/getCurrent API Request
  */
-export interface ActivesessionGetCurrentV1Response extends GenericResponse {
+export interface ActivesessionGetCurrentV1Response extends CommonResponse {
   mPayload: ActivesessionGetCurrentV1ResponseMPayload;
 }
 
@@ -60,6 +60,92 @@ export type ActivesessionGetCurrentV1ResponseMPayloadEActivesessionSessiontypeEn
 
 
 /**
+ * Define if the object is a Simple or Compound type.
+ */
+export type CommonEObjectType = 'Simple' | 'Compound';
+
+/**
+ * All API response will inherit this based Response
+ */
+export interface CommonResponse {
+  objDebugPayload?: CommonResponseObjDebugPayload;
+  objDebug?: CommonResponseObjDebug;
+}
+
+
+/**
+ * Generic Error Message
+ */
+export interface CommonResponseError {
+  /**
+   * More detail about the error
+   */
+  sErrorMessage: string;
+}
+
+
+/**
+ * This is a generic debug object that is returned by all API requests
+ */
+export interface CommonResponseObjDebug {
+  /**
+   * The peak memory allocated during the API request execution. Formatted as a human readable string
+   */
+  sMemoryUsage: string;
+  /**
+   * The total server execution time of the API request execution. Formatted as a human readable string
+   */
+  sRunTime: string;
+  /**
+   * The number of SQL SELECT queries that were sent to the database server during the API request execution
+   */
+  iSQLSelects: number;
+  /**
+   * The number of SQL INSERT/UPDATE/DELETE queries that were sent to the database server during the API request execution
+   */
+  iSQLQueries: number;
+  /**
+   * An array of the SQL Queries that were executed during the API request execution
+   */
+  a_objSQLQuery: Array<CommonResponseObjSQLQuery>;
+}
+
+
+/**
+ * This is a debug object containing debugging information on the actual function
+ */
+export interface CommonResponseObjDebugPayload {
+  /**
+   * The minimum version of the function that can be called
+   */
+  iVersionMin: number;
+  /**
+   * The maximum version of the function that can be called
+   */
+  iVersionMax: number;
+  /**
+   * An array of permissions required to access this function.  If the value \"0\" is present in the array, anyone can call this function.  You must have one of the permission to access the function. You don\'t need to have all of them.
+   */
+  a_RequiredPermissions: Array<number>;
+}
+
+
+/**
+ * Definition of objSQLQuery Object
+ */
+export interface CommonResponseObjSQLQuery {
+  /**
+   * The SQL Query
+   */
+  sQuery: string;
+  /**
+   * Execution time of the SQL Query in seconds
+   */
+  fDuration: number;
+}
+
+
+/**
  * An Ezsignfolder Object and children to create a complete structure
  */
 export interface EzsignfolderCompoundRequest extends EzsignfolderRequest {
@@ -78,7 +164,7 @@ export interface EzsignfolderCreateObjectV1Request {
 /**
  * Response for the /1/object/ezsignfolder/createObject API Request
  */
-export interface EzsignfolderCreateObjectV1Response extends GenericResponse {
+export interface EzsignfolderCreateObjectV1Response extends CommonResponse {
   mPayload: EzsignfolderCreateObjectV1ResponseMPayload;
 }
 
@@ -97,7 +183,7 @@ export interface EzsignfolderCreateObjectV1ResponseMPayload {
 /**
  * Response for the /1/object/ezsignfolder/deleteObject API Request
  */
-export interface EzsignfolderDeleteObjectV1Response extends GenericResponse {
+export interface EzsignfolderDeleteObjectV1Response extends CommonResponse {
 }
 
 
@@ -112,14 +198,14 @@ export interface EzsignfolderEditObjectV1Request {
 /**
  * Response for the /1/object/ezsignfolder/editObject API Request
  */
-export interface EzsignfolderEditObjectV1Response extends GenericResponse {
+export interface EzsignfolderEditObjectV1Response extends CommonResponse {
 }
 
 
 /**
  * Response for the /1/object/ezsignfolder/getObject API Request
  */
-export interface EzsignfolderGetObjectV1Response extends GenericResponse {
+export interface EzsignfolderGetObjectV1Response extends CommonResponse {
   /**
    * Payload for the /1/object/ezsignfolder/getObject API Request
    */
@@ -151,86 +237,6 @@ export interface EzsignfolderRequest {
    * Determine if a Time Stamping Authority should add a timestamp on each of the signature. Valid values are: 1. No. No TSA Timestamping will requested. This will make all signatures a lot faster since no round-trip to the TSA server will be required. Timestamping will be made using eZsign server\'s time. 2. Best effort. Timestamping from a Time Stamping Authority will be requested but is not mandatory. In the very improbable case it cannot be completed, the timestamping will be made using eZsign server\'s time. **Additional fee applies** 3. Mandatory. Timestamping from a Time Stamping Authority will be requested and is mandatory. In the very improbable case it cannot be completed, the signature will fail and the user will be asked to retry. **Additional fee applies** 
    */
   fkiEzsigntsarequirementID: number;
-}
-
-
-/**
- * All API response will inherit this based Response
- */
-export interface GenericResponse {
-  objDebugPayload?: GenericResponseObjDebugPayload;
-  objDebug?: GenericResponseObjDebug;
-}
-
-
-/**
- * Generic Error Message
- */
-export interface GenericResponseError {
-  /**
-   * More detail about the error
-   */
-  sErrorMessage: string;
-}
-
-
-/**
- * This is a generic debug object that is returned by all API requests
- */
-export interface GenericResponseObjDebug {
-  /**
-   * The peak memory allocated during the API request execution. Formatted as a human readable string
-   */
-  sMemoryUsage: string;
-  /**
-   * The total server execution time of the API request execution. Formatted as a human readable string
-   */
-  sRunTime: string;
-  /**
-   * The number of SQL SELECT queries that were sent to the database server during the API request execution
-   */
-  iSQLSelects: number;
-  /**
-   * The number of SQL INSERT/UPDATE/DELETE queries that were sent to the database server during the API request execution
-   */
-  iSQLQueries: number;
-  /**
-   * An array of the SQL Queries that were executed during the API request execution
-   */
-  a_objSQLQuery: Array<GenericResponseObjSQLQuery>;
-}
-
-
-/**
- * This is a debug object containing debugging information on the actual function
- */
-export interface GenericResponseObjDebugPayload {
-  /**
-   * The minimum version of the function that can be called
-   */
-  iVersionMin: number;
-  /**
-   * The maximum version of the function that can be called
-   */
-  iVersionMax: number;
-  /**
-   * An array of permissions required to access this function.  If the value \"0\" is present in the array, anyone can call this function.  You must have one of the permission to access the function. You don\'t need to have all of them.
-   */
-  a_RequiredPermissions: Array<number>;
-}
-
-
-/**
- * Definition of objSQLQuery Object
- */
-export interface GenericResponseObjSQLQuery {
-  /**
-   * The SQL Query
-   */
-  sQuery: string;
-  /**
-   * Execution time of the SQL Query in seconds
-   */
-  fDuration: number;
+  eObjectType: CommonEObjectType;
 }
 
