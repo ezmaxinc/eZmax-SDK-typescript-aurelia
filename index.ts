@@ -31,4 +31,5 @@ export {
   EzsignfolderEditObjectV1Response,
   EzsignfolderGetObjectV1Response,
   EzsignfolderRequest,
+  EzsignsignerRequest,
 } from './models';

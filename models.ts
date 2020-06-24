@@ -144,6 +144,10 @@ export interface CommonResponseObjSQLQuery {
  * An Ezsignfolder Object and children to create a complete structure
  */
 export interface EzsignfolderCompoundRequest extends EzsignfolderRequest {
+  /**
+   * An array of signers that will be invited to sign the Ezsigndocuments
+   */
+  a_Ezsignsigner: Array<EzsignsignerRequest>;
 }
 
 
@@ -221,6 +225,10 @@ export interface EzsignfolderRequest {
    */
   fkiLanguageID: number;
   /**
+   * Determine if a Time Stamping Authority should add a timestamp on each of the signature. Valid values are: 1. No. No TSA Timestamping will requested. This will make all signatures a lot faster since no round-trip to the TSA server will be required. Timestamping will be made using eZsign server\'s time. 2. Best effort. Timestamping from a Time Stamping Authority will be requested but is not mandatory. In the very improbable case it cannot be completed, the timestamping will be made using eZsign server\'s time. **Additional fee applies** 3. Mandatory. Timestamping from a Time Stamping Authority will be requested and is mandatory. In the very improbable case it cannot be completed, the signature will fail and the user will be asked to retry. **Additional fee applies** 
+   */
+  fkiEzsigntsarequirementID: number;
+  /**
    * The description of the Ezsign Folder
    */
   sEzsignfolderDescription: string;
@@ -229,24 +237,33 @@ export interface EzsignfolderRequest {
    */
   tEzsignfolderNote: string;
   /**
-   * Determine if a Time Stamping Authority should add a timestamp on each of the signature. Valid values are: 1. No. No TSA Timestamping will requested. This will make all signatures a lot faster since no round-trip to the TSA server will be required. Timestamping will be made using eZsign server\'s time. 2. Best effort. Timestamping from a Time Stamping Authority will be requested but is not mandatory. In the very improbable case it cannot be completed, the timestamping will be made using eZsign server\'s time. **Additional fee applies** 3. Mandatory. Timestamping from a Time Stamping Authority will be requested and is mandatory. In the very improbable case it cannot be completed, the signature will fail and the user will be asked to retry. **Additional fee applies** 
+   * Frequency at which reminders will be sent to signers that haven\'t signed the documents
    */
-  fkiEzsigntsarequirementID: number;
-  testEnum?: EzsignfolderRequestTestEnumEnum;
-  testString?: string;
-  testInteger?: number;
-  testBoolean?: boolean;
-  testBase64?: string;
-  testEmail?: string;
-  testIPV4?: string;
-  testDate?: string;
-  patternSSN?: string;
-  testNullableTrue?: string;
-  testEzmaxCustom?: string;
+  eEzsignfolderSendreminderfrequency: EzsignfolderRequestEEzsignfolderSendreminderfrequencyEnum;
 }
 
 /**
- * Enum for the testEnum property.
+ * Enum for the eEzsignfolderSendreminderfrequency property.
  */
-export type EzsignfolderRequestTestEnumEnum = 'Simple' | 'Compound';
+export type EzsignfolderRequestEEzsignfolderSendreminderfrequencyEnum = 'None' | 'Daily' | 'Weekly';
+
+
+/**
+ * An Ezsignsigner Object
+ */
+export interface EzsignsignerRequest {
+  /**
+   * The ID of the tax assignment, Valid values are: 1. No tax 2. GST 3. HST (ON) 4. HST (NB) 5. HST (NS) 6. HST (NL) 7. HST (PE) 8. GST + QST (QC) 9. GST + QST (QC) Non-Recoverable 10. GST + PST (BC) 11. GST + PST (SK) 12. GST + RST (MB) 13. GST + PST (BC) Non-Recoverable 14. GST + PST (SK) Non-Recoverable 15. GST + RST (MB) Non-Recoverable
+   */
+  fkiTaxassignmentID: number;
+  /**
+   * The method the Ezsignsigner will authenticate to the signing platform.  1. **Password** means the Ezsignsigner will receive a secure link by email. 2. **PasswordPhone** means the Ezsignsigner will receive a secure link by email and will need to authenticate using SMS or Phone call. 3. **PasswordQuestion** means the Ezsignsigner will receive a secure link by email and will need to authenticate using a predefined question and answer. 4. **Phone** means the Ezsignsigner will only be able to sign \"In-Person\" and will need to authenticate using SMS or Phone call. No email will be sent for invitation to sign.
+   */
+  eEzsignsignerLogintype: EzsignsignerRequestEEzsignsignerLogintypeEnum;
+}
+
+/**
+ * Enum for the eEzsignsignerLogintype property.
+ */
+export type EzsignsignerRequestEEzsignsignerLogintypeEnum = 'Password' | 'PasswordPhone' | 'PasswordQuestion' | 'Phone';
 
