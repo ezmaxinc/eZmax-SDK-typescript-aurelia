@@ -13,6 +13,7 @@
 export { Api } from './Api';
 export { AuthStorage } from './AuthStorage';
 export { ActivesessionApi } from './ActivesessionApi';
+export { EzsigndocumentApi } from './EzsigndocumentApi';
 export { EzsignfolderApi } from './EzsignfolderApi';
 export {
   ActivesessionGetCurrentV1Response,
@@ -22,6 +23,15 @@ export {
   CommonResponseObjDebug,
   CommonResponseObjDebugPayload,
   CommonResponseObjSQLQuery,
+  EzsigndocumentCompoundRequest,
+  EzsigndocumentCreateObjectV1Request,
+  EzsigndocumentCreateObjectV1Response,
+  EzsigndocumentCreateObjectV1ResponseMPayload,
+  EzsigndocumentDeleteObjectV1Response,
+  EzsigndocumentEditObjectV1Request,
+  EzsigndocumentEditObjectV1Response,
+  EzsigndocumentGetObjectV1Response,
+  EzsigndocumentRequest,
   EzsignfolderCompoundRequest,
   EzsignfolderCreateObjectV1Request,
   EzsignfolderCreateObjectV1Response,

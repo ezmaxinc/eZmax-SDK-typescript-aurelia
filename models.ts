@@ -141,6 +141,123 @@ export interface CommonResponseObjSQLQuery {
 
 
 /**
+ * An Ezsigndocument Object and children to create a complete structure
+ */
+export interface EzsigndocumentCompoundRequest extends EzsigndocumentRequest {
+  /**
+   * An array of signers that will be invited to sign the Ezsigndocuments
+   */
+  a_Ezsignsigner: Array<EzsignsignerRequest>;
+}
+
+
+/**
+ * Request for the /1/object/ezsigndocument/createObject API Request
+ */
+export interface EzsigndocumentCreateObjectV1Request {
+  objEzsigndocument?: EzsigndocumentRequest;
+  objEzsigndocumentCompound?: EzsigndocumentCompoundRequest;
+}
+
+
+/**
+ * Response for the /1/object/ezsigndocument/createObject API Request
+ */
+export interface EzsigndocumentCreateObjectV1Response extends CommonResponse {
+  mPayload: EzsigndocumentCreateObjectV1ResponseMPayload;
+}
+
+
+/**
+ * Payload for the /1/object/ezsigndocument/editObject API Request
+ */
+export interface EzsigndocumentCreateObjectV1ResponseMPayload {
+  /**
+   * An array of unique IDs representing the object that were requested to be created.  They are returned in the same order as the array containing the objects to be created that was sent in the request.
+   */
+  a_pkiEzsigndocumentID: Array<number>;
+}
+
+
+/**
+ * Response for the /1/object/ezsigndocument/deleteObject API Request
+ */
+export interface EzsigndocumentDeleteObjectV1Response extends CommonResponse {
+}
+
+
+/**
+ * Request for the /1/object/ezsigndocument/editObject API Request
+ */
+export interface EzsigndocumentEditObjectV1Request {
+  objEzsigndocument?: EzsigndocumentRequest;
+}
+
+
+/**
+ * Response for the /1/object/ezsigndocument/editObject API Request
+ */
+export interface EzsigndocumentEditObjectV1Response extends CommonResponse {
+}
+
+
+/**
+ * Response for the /1/object/ezsigndocument/getObject API Request
+ */
+export interface EzsigndocumentGetObjectV1Response extends CommonResponse {
+  /**
+   * Payload for the /1/object/ezsigndocument/getObject API Request
+   */
+  mPayload: object;
+}
+
+
+/**
+ * An Ezsigndocument Object
+ */
+export interface EzsigndocumentRequest {
+  /**
+   * The name of the document that will be presented to Ezsignsigners
+   */
+  sEzsignDocumentName: string;
+  /**
+   * The actual file name that will be used when downloading or attaching to an email.
+   */
+  sEzsignDocumentFilename: string;
+  /**
+   * Indicates where to look for the document binary content.
+   */
+  eEzsigndocumentSource: EzsigndocumentRequestEEzsigndocumentSourceEnum;
+  /**
+   * Indicates the format of the document.
+   */
+  eEzsigndocumentFormat: EzsigndocumentRequestEEzsigndocumentFormatEnum;
+  /**
+   * The Base64 encoded binary content of the document.  This field is Required when eEzsigndocumentSource = Base64.
+   */
+  sEzsigndocumentBase64?: string;
+  /**
+   * A reference to a valid Ezsignfolder.  That value is returned after a successful Ezsignfolder Creation.
+   */
+  fkiEzsignfolderID: number;
+  /**
+   * Represent a Date Time. The timezone is the one configured in the User\'s profile.
+   */
+  dtEzsigndocumentDuedate: string;
+}
+
+/**
+ * Enum for the eEzsigndocumentSource property.
+ */
+export type EzsigndocumentRequestEEzsigndocumentSourceEnum = 'Base64';
+
+/**
+ * Enum for the eEzsigndocumentFormat property.
+ */
+export type EzsigndocumentRequestEEzsigndocumentFormatEnum = 'Pdf';
+
+
+/**
  * An Ezsignfolder Object and children to create a complete structure
  */
 export interface EzsignfolderCompoundRequest extends EzsignfolderRequest {

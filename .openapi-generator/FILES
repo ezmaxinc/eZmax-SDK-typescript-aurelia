@@ -3,6 +3,7 @@
 ActivesessionApi.ts
 Api.ts
 AuthStorage.ts
+EzsigndocumentApi.ts
 EzsignfolderApi.ts
 README.md
 git_push.sh
