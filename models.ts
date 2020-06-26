@@ -144,10 +144,6 @@ export interface CommonResponseObjSQLQuery {
  * An Ezsigndocument Object and children to create a complete structure
  */
 export interface EzsigndocumentCompoundRequest extends EzsigndocumentRequest {
-  /**
-   * An array of signers that will be invited to sign the Ezsigndocuments
-   */
-  a_Ezsignsigner: Array<EzsignsignerRequest>;
 }
 
 
