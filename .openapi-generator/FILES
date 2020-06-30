@@ -5,6 +5,7 @@ Api.ts
 AuthStorage.ts
 EzsigndocumentApi.ts
 EzsignfolderApi.ts
+EzsignfoldersignerassociationApi.ts
 README.md
 git_push.sh
 index.ts
