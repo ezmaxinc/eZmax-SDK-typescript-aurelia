@@ -19,7 +19,9 @@ import {
   EzsignfolderGetObjectV1Response,
   EzsignfolderDeleteObjectV1Response,
   EzsignfolderEditObjectV1Request,
+  EzsignfolderSendV1Request,
   EzsignfolderCreateObjectV1Response,
+  EzsignfolderSendV1Response,
 } from './models';
 
 /**
@@ -56,6 +58,14 @@ export interface IEzsignfolderGetObjectGetChildrenV1Params {
  */
 export interface IEzsignfolderGetObjectV1Params {
   pkiEzsignfolderID: number;
+}
+
+/**
+ * ezsignfolderSendV1 - parameters interface
+ */
+export interface IEzsignfolderSendV1Params {
+  pkiEzsignfolderID: number;
+  ezsignfolderSendV1Request: EzsignfolderSendV1Request;
 }
 
 /**
@@ -213,6 +223,40 @@ export class EzsignfolderApi extends Api {
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
       .asGet()
+
+      // Authentication 'Authorization' required
+      .withHeader('Authorization', this.authStorage.getAuthorization())
+      // Send the request
+      .send();
+
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      throw new Error(response.content);
+    }
+
+    // Extract the content
+    return response.content;
+  }
+
+  /**
+   * Send the Ezsignfolder to the signatories for signature
+   * @param params.pkiEzsignfolderID The unique ID of the Ezsignfolder
+   * @param params.ezsignfolderSendV1Request 
+   */
+  async ezsignfolderSendV1(params: IEzsignfolderSendV1Params): Promise<EzsignfolderSendV1Response> {
+    // Verify required parameters are set
+    this.ensureParamIsSet('ezsignfolderSendV1', params, 'pkiEzsignfolderID');
+    this.ensureParamIsSet('ezsignfolderSendV1', params, 'ezsignfolderSendV1Request');
+
+    // Create URL to call
+    const url = `${this.basePath}/1/object/ezsignfolder/{pkiEzsignfolderID}/send`
+      .replace(`{${'pkiEzsignfolderID'}}`, encodeURIComponent(`${params['pkiEzsignfolderID']}`));
+
+    const response = await this.httpClient.createRequest(url)
+      // Set HTTP method
+      .asPost()
+      // Encode body parameter
+      .withHeader('content-type', 'application/json')
+      .withContent(JSON.stringify(params['ezsignfolderSendV1Request'] || {}))
 
       // Authentication 'Authorization' required
       .withHeader('Authorization', this.authStorage.getAuthorization())

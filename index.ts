@@ -42,6 +42,8 @@ export {
   EzsignfolderGetObjectV1Response,
   EzsignfolderRequest,
   EzsignfolderRequestCompound,
+  EzsignfolderSendV1Request,
+  EzsignfolderSendV1Response,
   EzsignfoldersignerassociationCreateObjectV1Request,
   EzsignfoldersignerassociationCreateObjectV1Response,
   EzsignfoldersignerassociationCreateObjectV1ResponseMPayload,

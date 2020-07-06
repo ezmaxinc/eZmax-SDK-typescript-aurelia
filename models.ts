@@ -362,6 +362,24 @@ export interface EzsignfolderRequestCompound extends EzsignfolderRequest {
 
 
 /**
+ * Request for the /1/object/ezsignfolder/{pkiEzsignfolderID}/send API Request
+ */
+export interface EzsignfolderSendV1Request {
+  /**
+   * A custom text message that will be added to the email sent to signatories inviting them to sign.  You can send an empty string and only the generic message will be sent.
+   */
+  tExtraMessage: string;
+}
+
+
+/**
+ * Response for the /1/object/ezsignfolder/{pkiEzsignfolderID}/send API Request
+ */
+export interface EzsignfolderSendV1Response extends CommonResponse {
+}
+
+
+/**
  * Request for the /1/object/ezsignfoldersignerassociation/createObject API Request
  */
 export interface EzsignfoldersignerassociationCreateObjectV1Request {
