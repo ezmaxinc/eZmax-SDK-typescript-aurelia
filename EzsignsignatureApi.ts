@@ -15,57 +15,57 @@ import { HttpClient } from 'aurelia-http-client';
 import { Api } from './Api';
 import { AuthStorage } from './AuthStorage';
 import {
-  EzsigndocumentCreateObjectV1Response,
-  EzsigndocumentEditObjectV1Request,
-  EzsigndocumentGetObjectV1Response,
-  EzsigndocumentEditObjectV1Response,
-  EzsigndocumentDeleteObjectV1Response,
+  EzsignsignatureDeleteObjectV1Response,
+  EzsignsignatureEditObjectV1Response,
+  EzsignsignatureGetObjectV1Response,
+  EzsignsignatureCreateObjectV1Response,
+  EzsignsignatureEditObjectV1Request,
 } from './models';
 
 /**
- * ezsigndocumentCreateObjectV1 - parameters interface
+ * ezsignsignatureCreateObjectV1 - parameters interface
  */
-export interface IEzsigndocumentCreateObjectV1Params {
-  ezsigndocumentCreateObjectV1Request: Array<EzsigndocumentCreateObjectV1Request>;
+export interface IEzsignsignatureCreateObjectV1Params {
+  ezsignsignatureCreateObjectV1Request: Array<EzsignsignatureCreateObjectV1Request>;
 }
 
 /**
- * ezsigndocumentDeleteObjectV1 - parameters interface
+ * ezsignsignatureDeleteObjectV1 - parameters interface
  */
-export interface IEzsigndocumentDeleteObjectV1Params {
-  pkiEzsigndocumentID: number;
+export interface IEzsignsignatureDeleteObjectV1Params {
+  pkiEzsignsignatureID: number;
 }
 
 /**
- * ezsigndocumentEditObjectV1 - parameters interface
+ * ezsignsignatureEditObjectV1 - parameters interface
  */
-export interface IEzsigndocumentEditObjectV1Params {
-  pkiEzsigndocumentID: number;
-  ezsigndocumentEditObjectV1Request: EzsigndocumentEditObjectV1Request;
+export interface IEzsignsignatureEditObjectV1Params {
+  pkiEzsignsignatureID: number;
+  ezsignsignatureEditObjectV1Request: EzsignsignatureEditObjectV1Request;
 }
 
 /**
- * ezsigndocumentGetObjectGetChildrenV1 - parameters interface
+ * ezsignsignatureGetObjectGetChildrenV1 - parameters interface
  */
-export interface IEzsigndocumentGetObjectGetChildrenV1Params {
-  pkiEzsigndocumentID: number;
+export interface IEzsignsignatureGetObjectGetChildrenV1Params {
+  pkiEzsignsignatureID: number;
 }
 
 /**
- * ezsigndocumentGetObjectV1 - parameters interface
+ * ezsignsignatureGetObjectV1 - parameters interface
  */
-export interface IEzsigndocumentGetObjectV1Params {
-  pkiEzsigndocumentID: number;
+export interface IEzsignsignatureGetObjectV1Params {
+  pkiEzsignsignatureID: number;
 }
 
 /**
- * EzsigndocumentApi - API class
+ * EzsignsignatureApi - API class
  */
 @autoinject()
-export class EzsigndocumentApi extends Api {
+export class EzsignsignatureApi extends Api {
 
   /**
-   * Creates a new EzsigndocumentApi class.
+   * Creates a new EzsignsignatureApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.
@@ -75,23 +75,23 @@ export class EzsigndocumentApi extends Api {
   }
 
   /**
-   * Create a new Ezsigndocument
+   * Create a new Ezsignsignature
    * The endpoint allows to create one or many elements at once.  The array can contain simple (Just the object) or compound (The object and its child) objects.  Creating compound elements allows to reduce the multiple requests to create all child objects.
-   * @param params.ezsigndocumentCreateObjectV1Request 
+   * @param params.ezsignsignatureCreateObjectV1Request 
    */
-  async ezsigndocumentCreateObjectV1(params: IEzsigndocumentCreateObjectV1Params): Promise<EzsigndocumentCreateObjectV1Response> {
+  async ezsignsignatureCreateObjectV1(params: IEzsignsignatureCreateObjectV1Params): Promise<EzsignsignatureCreateObjectV1Response> {
     // Verify required parameters are set
-    this.ensureParamIsSet('ezsigndocumentCreateObjectV1', params, 'ezsigndocumentCreateObjectV1Request');
+    this.ensureParamIsSet('ezsignsignatureCreateObjectV1', params, 'ezsignsignatureCreateObjectV1Request');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/ezsigndocument`;
+    const url = `${this.basePath}/1/object/ezsignsignature`;
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
       .asPost()
       // Encode body parameter
       .withHeader('content-type', 'application/json')
-      .withContent(JSON.stringify(params['ezsigndocumentCreateObjectV1Request'] || {}))
+      .withContent(JSON.stringify(params['ezsignsignatureCreateObjectV1Request'] || {}))
 
       // Authentication 'Authorization' required
       .withHeader('Authorization', this.authStorage.getAuthorization())
@@ -107,16 +107,16 @@ export class EzsigndocumentApi extends Api {
   }
 
   /**
-   * Delete an existing Ezsigndocument
-   * @param params.pkiEzsigndocumentID The unique ID of the Ezsigndocument
+   * Delete an existing Ezsignsignature
+   * @param params.pkiEzsignsignatureID The unique ID of the Ezsignsignature
    */
-  async ezsigndocumentDeleteObjectV1(params: IEzsigndocumentDeleteObjectV1Params): Promise<EzsigndocumentDeleteObjectV1Response> {
+  async ezsignsignatureDeleteObjectV1(params: IEzsignsignatureDeleteObjectV1Params): Promise<EzsignsignatureDeleteObjectV1Response> {
     // Verify required parameters are set
-    this.ensureParamIsSet('ezsigndocumentDeleteObjectV1', params, 'pkiEzsigndocumentID');
+    this.ensureParamIsSet('ezsignsignatureDeleteObjectV1', params, 'pkiEzsignsignatureID');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/ezsigndocument/{pkiEzsigndocumentID}`
-      .replace(`{${'pkiEzsigndocumentID'}}`, encodeURIComponent(`${params['pkiEzsigndocumentID']}`));
+    const url = `${this.basePath}/1/object/ezsignsignature/{pkiEzsignsignatureID}`
+      .replace(`{${'pkiEzsignsignatureID'}}`, encodeURIComponent(`${params['pkiEzsignsignatureID']}`));
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
@@ -136,25 +136,25 @@ export class EzsigndocumentApi extends Api {
   }
 
   /**
-   * Modify an existing Ezsigndocument
-   * @param params.pkiEzsigndocumentID The unique ID of the Ezsigndocument
-   * @param params.ezsigndocumentEditObjectV1Request 
+   * Modify an existing Ezsignsignature
+   * @param params.pkiEzsignsignatureID The unique ID of the Ezsignsignature
+   * @param params.ezsignsignatureEditObjectV1Request 
    */
-  async ezsigndocumentEditObjectV1(params: IEzsigndocumentEditObjectV1Params): Promise<EzsigndocumentEditObjectV1Response> {
+  async ezsignsignatureEditObjectV1(params: IEzsignsignatureEditObjectV1Params): Promise<EzsignsignatureEditObjectV1Response> {
     // Verify required parameters are set
-    this.ensureParamIsSet('ezsigndocumentEditObjectV1', params, 'pkiEzsigndocumentID');
-    this.ensureParamIsSet('ezsigndocumentEditObjectV1', params, 'ezsigndocumentEditObjectV1Request');
+    this.ensureParamIsSet('ezsignsignatureEditObjectV1', params, 'pkiEzsignsignatureID');
+    this.ensureParamIsSet('ezsignsignatureEditObjectV1', params, 'ezsignsignatureEditObjectV1Request');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/ezsigndocument/{pkiEzsigndocumentID}`
-      .replace(`{${'pkiEzsigndocumentID'}}`, encodeURIComponent(`${params['pkiEzsigndocumentID']}`));
+    const url = `${this.basePath}/1/object/ezsignsignature/{pkiEzsignsignatureID}`
+      .replace(`{${'pkiEzsignsignatureID'}}`, encodeURIComponent(`${params['pkiEzsignsignatureID']}`));
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
       .asPut()
       // Encode body parameter
       .withHeader('content-type', 'application/json')
-      .withContent(JSON.stringify(params['ezsigndocumentEditObjectV1Request'] || {}))
+      .withContent(JSON.stringify(params['ezsignsignatureEditObjectV1Request'] || {}))
 
       // Authentication 'Authorization' required
       .withHeader('Authorization', this.authStorage.getAuthorization())
@@ -170,16 +170,16 @@ export class EzsigndocumentApi extends Api {
   }
 
   /**
-   * Retrieve an existing Ezsigndocument\&#39;s children IDs
-   * @param params.pkiEzsigndocumentID The unique ID of the Ezsigndocument
+   * Retrieve an existing Ezsignsignature\&#39;s children IDs
+   * @param params.pkiEzsignsignatureID The unique ID of the Ezsignsignature
    */
-  async ezsigndocumentGetObjectGetChildrenV1(params: IEzsigndocumentGetObjectGetChildrenV1Params): Promise<any> {
+  async ezsignsignatureGetObjectGetChildrenV1(params: IEzsignsignatureGetObjectGetChildrenV1Params): Promise<any> {
     // Verify required parameters are set
-    this.ensureParamIsSet('ezsigndocumentGetObjectGetChildrenV1', params, 'pkiEzsigndocumentID');
+    this.ensureParamIsSet('ezsignsignatureGetObjectGetChildrenV1', params, 'pkiEzsignsignatureID');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/ezsigndocument/{pkiEzsigndocumentID}/getChildren`
-      .replace(`{${'pkiEzsigndocumentID'}}`, encodeURIComponent(`${params['pkiEzsigndocumentID']}`));
+    const url = `${this.basePath}/1/object/ezsignsignature/{pkiEzsignsignatureID}/getChildren`
+      .replace(`{${'pkiEzsignsignatureID'}}`, encodeURIComponent(`${params['pkiEzsignsignatureID']}`));
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
@@ -199,16 +199,16 @@ export class EzsigndocumentApi extends Api {
   }
 
   /**
-   * Retrieve an existing Ezsigndocument
-   * @param params.pkiEzsigndocumentID The unique ID of the Ezsigndocument
+   * Retrieve an existing Ezsignsignature
+   * @param params.pkiEzsignsignatureID The unique ID of the Ezsignsignature
    */
-  async ezsigndocumentGetObjectV1(params: IEzsigndocumentGetObjectV1Params): Promise<EzsigndocumentGetObjectV1Response> {
+  async ezsignsignatureGetObjectV1(params: IEzsignsignatureGetObjectV1Params): Promise<EzsignsignatureGetObjectV1Response> {
     // Verify required parameters are set
-    this.ensureParamIsSet('ezsigndocumentGetObjectV1', params, 'pkiEzsigndocumentID');
+    this.ensureParamIsSet('ezsignsignatureGetObjectV1', params, 'pkiEzsignsignatureID');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/ezsigndocument/{pkiEzsigndocumentID}`
-      .replace(`{${'pkiEzsigndocumentID'}}`, encodeURIComponent(`${params['pkiEzsigndocumentID']}`));
+    const url = `${this.basePath}/1/object/ezsignsignature/{pkiEzsignsignatureID}`
+      .replace(`{${'pkiEzsignsignatureID'}}`, encodeURIComponent(`${params['pkiEzsignsignatureID']}`));
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
