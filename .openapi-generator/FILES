@@ -3,6 +3,7 @@
 ActivesessionApi.ts
 Api.ts
 AuthStorage.ts
+EzsignWebhookApi.ts
 EzsigndocumentApi.ts
 EzsignfolderApi.ts
 EzsignfoldersignerassociationApi.ts
