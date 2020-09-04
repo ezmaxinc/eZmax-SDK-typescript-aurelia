@@ -15,23 +15,24 @@ import { HttpClient } from 'aurelia-http-client';
 import { Api } from './Api';
 import { AuthStorage } from './AuthStorage';
 import {
-  ActivesessionGetCurrentV1Response,
+  FranchisereferalincomeCreateObjectV1Response,
 } from './models';
 
 /**
- * activesessionGetCurrentV1 - parameters interface
+ * franchisereferalincomeCreateObjectV1 - parameters interface
  */
-export interface IActivesessionGetCurrentV1Params {
+export interface IFranchisereferalincomeCreateObjectV1Params {
+  franchisereferalincomeCreateObjectV1Request: Array<FranchisereferalincomeCreateObjectV1Request>;
 }
 
 /**
- * ActivesessionApi - API class
+ * FranchisereferalincomeApi - API class
  */
 @autoinject()
-export class ActivesessionApi extends Api {
+export class FranchisereferalincomeApi extends Api {
 
   /**
-   * Creates a new ActivesessionApi class.
+   * Creates a new FranchisereferalincomeApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.
@@ -41,18 +42,23 @@ export class ActivesessionApi extends Api {
   }
 
   /**
-   * Get Current Activesession
-   * Retrieve the details about the current activesession
+   * Create a new Franchisereferalincome
+   * The endpoint allows to create one or many elements at once.  The array can contain simple (Just the object) or compound (The object and its child) objects.  Creating compound elements allows to reduce the multiple requests to create all child objects.
+   * @param params.franchisereferalincomeCreateObjectV1Request 
    */
-  async activesessionGetCurrentV1(): Promise<ActivesessionGetCurrentV1Response> {
+  async franchisereferalincomeCreateObjectV1(params: IFranchisereferalincomeCreateObjectV1Params): Promise<FranchisereferalincomeCreateObjectV1Response> {
     // Verify required parameters are set
+    this.ensureParamIsSet('franchisereferalincomeCreateObjectV1', params, 'franchisereferalincomeCreateObjectV1Request');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/activesession/getCurrent`;
+    const url = `${this.basePath}/1/object/franchisereferalincome/`;
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
-      .asGet()
+      .asPost()
+      // Encode body parameter
+      .withHeader('content-type', 'application/json')
+      .withContent(JSON.stringify(params['franchisereferalincomeCreateObjectV1Request'] || {}))
 
       // Authentication 'Authorization' required
       .withHeader('Authorization', this.authStorage.getAuthorization())
