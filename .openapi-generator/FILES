@@ -8,6 +8,7 @@ EzsignfolderApi.ts
 EzsignfoldersignerassociationApi.ts
 EzsignsignatureApi.ts
 FranchisereferalincomeApi.ts
+PeriodApi.ts
 README.md
 git_push.sh
 index.ts

@@ -15,24 +15,24 @@ import { HttpClient } from 'aurelia-http-client';
 import { Api } from './Api';
 import { AuthStorage } from './AuthStorage';
 import {
-  FranchisereferalincomeCreateObjectV1Response,
+  CommonGetAutocompleteV1Response,
 } from './models';
 
 /**
- * franchisereferalincomeCreateObjectV1 - parameters interface
+ * periodGetAutocompleteV1 - parameters interface
  */
-export interface IFranchisereferalincomeCreateObjectV1Params {
-  franchisereferalincomeCreateObjectV1Request: Array<FranchisereferalincomeCreateObjectV1Request>;
+export interface IPeriodGetAutocompleteV1Params {
+  sSelector: 'ActiveNormal' | 'ActiveNormalAndEndOfYear' | 'AllNormal' | 'AllNormalAndEndOfYear';
 }
 
 /**
- * FranchisereferalincomeApi - API class
+ * PeriodApi - API class
  */
 @autoinject()
-export class FranchisereferalincomeApi extends Api {
+export class PeriodApi extends Api {
 
   /**
-   * Creates a new FranchisereferalincomeApi class.
+   * Creates a new PeriodApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.
@@ -42,23 +42,24 @@ export class FranchisereferalincomeApi extends Api {
   }
 
   /**
-   * Create a new Franchisereferalincome
-   * The endpoint allows to create one or many elements at once.  The array can contain simple (Just the object) or compound (The object and its child) objects.  Creating compound elements allows to reduce the multiple requests to create all child objects.
-   * @param params.franchisereferalincomeCreateObjectV1Request 
+   * Retrieve Periods and IDs
+   * Get the list of Periods to be used in a dropdown or autocomplete control.
+   * @param params.sSelector The types of Periods to return
    */
-  async franchisereferalincomeCreateObjectV1(params: IFranchisereferalincomeCreateObjectV1Params): Promise<FranchisereferalincomeCreateObjectV1Response> {
+  async periodGetAutocompleteV1(params: IPeriodGetAutocompleteV1Params): Promise<CommonGetAutocompleteV1Response> {
     // Verify required parameters are set
-    this.ensureParamIsSet('franchisereferalincomeCreateObjectV1', params, 'franchisereferalincomeCreateObjectV1Request');
+    this.ensureParamIsSet('periodGetAutocompleteV1', params, 'sSelector');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/franchisereferalincome`;
+    const url = `${this.basePath}/1/object/period/getAutocomplete`;
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
-      .asPost()
-      // Encode body parameter
-      .withHeader('content-type', 'application/json')
-      .withContent(JSON.stringify(params['franchisereferalincomeCreateObjectV1Request'] || {}))
+      .asGet()
+      // Set query parameters
+      .withParams({ 
+        'sSelector': params['sSelector'],
+      })
 
       // Authentication 'Authorization' required
       .withHeader('Authorization', this.authStorage.getAuthorization())
