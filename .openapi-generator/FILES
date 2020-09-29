@@ -7,6 +7,7 @@ EzsigndocumentApi.ts
 EzsignfolderApi.ts
 EzsignfoldersignerassociationApi.ts
 EzsignsignatureApi.ts
+FranchisebrokerApi.ts
 FranchisereferalincomeApi.ts
 PeriodApi.ts
 README.md

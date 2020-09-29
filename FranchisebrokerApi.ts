@@ -15,24 +15,25 @@ import { HttpClient } from 'aurelia-http-client';
 import { Api } from './Api';
 import { AuthStorage } from './AuthStorage';
 import {
-  FranchisereferalincomeCreateObjectV1Response,
+  CommonGetAutocompleteV1Response,
 } from './models';
 
 /**
- * franchisereferalincomeCreateObjectV1 - parameters interface
+ * franchisebrokerGetAutocompleteV1 - parameters interface
  */
-export interface IFranchisereferalincomeCreateObjectV1Params {
-  franchisereferalincomeCreateObjectV1Request: Array<FranchisereferalincomeCreateObjectV1Request>;
+export interface IFranchisebrokerGetAutocompleteV1Params {
+  sSelector: 'Active' | 'All';
+  sQuery?: string;
 }
 
 /**
- * FranchisereferalincomeApi - API class
+ * FranchisebrokerApi - API class
  */
 @autoinject()
-export class FranchisereferalincomeApi extends Api {
+export class FranchisebrokerApi extends Api {
 
   /**
-   * Creates a new FranchisereferalincomeApi class.
+   * Creates a new FranchisebrokerApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.
@@ -42,23 +43,26 @@ export class FranchisereferalincomeApi extends Api {
   }
 
   /**
-   * Create a new Franchisereferalincome
-   * The endpoint allows to create one or many elements at once.  The array can contain simple (Just the object) or compound (The object and its child) objects.  Creating compound elements allows to reduce the multiple requests to create all child objects.
-   * @param params.franchisereferalincomeCreateObjectV1Request 
+   * Retrieve Franchisebrokers and IDs
+   * Get the list of Franchisebrokers to be used in a dropdown or autocomplete control.
+   * @param params.sSelector The type of Franchisebrokers to return
+   * @param params.sQuery Allow to filter on the option value
    */
-  async franchisereferalincomeCreateObjectV1(params: IFranchisereferalincomeCreateObjectV1Params): Promise<FranchisereferalincomeCreateObjectV1Response> {
+  async franchisebrokerGetAutocompleteV1(params: IFranchisebrokerGetAutocompleteV1Params): Promise<CommonGetAutocompleteV1Response> {
     // Verify required parameters are set
-    this.ensureParamIsSet('franchisereferalincomeCreateObjectV1', params, 'franchisereferalincomeCreateObjectV1Request');
+    this.ensureParamIsSet('franchisebrokerGetAutocompleteV1', params, 'sSelector');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/franchisereferalincome`;
+    const url = `${this.basePath}/1/object/franchisebroker/getAutocomplete/{sSelector}`
+      .replace(`{${'sSelector'}}`, encodeURIComponent(`${params['sSelector']}`));
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
-      .asPost()
-      // Encode body parameter
-      .withHeader('content-type', 'application/json')
-      .withContent(JSON.stringify(params['franchisereferalincomeCreateObjectV1Request'] || {}))
+      .asGet()
+      // Set query parameters
+      .withParams({ 
+        'sQuery': params['sQuery'],
+      })
 
       // Authentication 'Authorization' required
       .withHeader('Authorization', this.authStorage.getAuthorization())
