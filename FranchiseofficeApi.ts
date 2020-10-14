@@ -19,21 +19,21 @@ import {
 } from './models';
 
 /**
- * periodGetAutocompleteV1 - parameters interface
+ * franchiseofficeGetAutocompleteV1 - parameters interface
  */
-export interface IPeriodGetAutocompleteV1Params {
-  sSelector: 'ActiveNormal' | 'ActiveNormalAndEndOfYear' | 'AllNormal' | 'AllNormalAndEndOfYear';
+export interface IFranchiseofficeGetAutocompleteV1Params {
+  sSelector: 'Active' | 'All';
   sQuery?: string;
 }
 
 /**
- * PeriodApi - API class
+ * FranchiseofficeApi - API class
  */
 @autoinject()
-export class PeriodApi extends Api {
+export class FranchiseofficeApi extends Api {
 
   /**
-   * Creates a new PeriodApi class.
+   * Creates a new FranchiseofficeApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.
@@ -43,17 +43,17 @@ export class PeriodApi extends Api {
   }
 
   /**
-   * Retrieve Periods and IDs
-   * Get the list of Periods to be used in a dropdown or autocomplete control.
-   * @param params.sSelector The types of Periods to return
+   * Retrieve Franchiseoffices and IDs
+   * Get the list of Franchiseoffices to be used in a dropdown or autocomplete control.
+   * @param params.sSelector The type of Franchiseoffices to return
    * @param params.sQuery Allow to filter on the option value
    */
-  async periodGetAutocompleteV1(params: IPeriodGetAutocompleteV1Params): Promise<CommonGetAutocompleteV1Response> {
+  async franchiseofficeGetAutocompleteV1(params: IFranchiseofficeGetAutocompleteV1Params): Promise<CommonGetAutocompleteV1Response> {
     // Verify required parameters are set
-    this.ensureParamIsSet('periodGetAutocompleteV1', params, 'sSelector');
+    this.ensureParamIsSet('franchiseofficeGetAutocompleteV1', params, 'sSelector');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/period/getAutocomplete/{sSelector}`
+    const url = `${this.basePath}/1/object/franchiseoffice/getAutocomplete/{sSelector}`
       .replace(`{${'sSelector'}}`, encodeURIComponent(`${params['sSelector']}`));
 
     const response = await this.httpClient.createRequest(url)
