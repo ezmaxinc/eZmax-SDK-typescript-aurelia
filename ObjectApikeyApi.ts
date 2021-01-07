@@ -15,25 +15,24 @@ import { HttpClient } from 'aurelia-http-client';
 import { Api } from './Api';
 import { AuthStorage } from './AuthStorage';
 import {
-  CommonGetAutocompleteV1Response,
+  ApikeyCreateObjectV1Response,
 } from './models';
 
 /**
- * franchiseofficeGetAutocompleteV1 - parameters interface
+ * apikeyCreateObjectV1 - parameters interface
  */
-export interface IFranchiseofficeGetAutocompleteV1Params {
-  sSelector: 'Active' | 'All';
-  sQuery?: string;
+export interface IApikeyCreateObjectV1Params {
+  apikeyCreateObjectV1Request: Array<ApikeyCreateObjectV1Request>;
 }
 
 /**
- * ObjectFranchiseofficeApi - API class
+ * ObjectApikeyApi - API class
  */
 @autoinject()
-export class ObjectFranchiseofficeApi extends Api {
+export class ObjectApikeyApi extends Api {
 
   /**
-   * Creates a new ObjectFranchiseofficeApi class.
+   * Creates a new ObjectApikeyApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.
@@ -43,26 +42,23 @@ export class ObjectFranchiseofficeApi extends Api {
   }
 
   /**
-   * Retrieve Franchiseoffices and IDs
-   * Get the list of Franchiseoffices to be used in a dropdown or autocomplete control.
-   * @param params.sSelector The type of Franchiseoffices to return
-   * @param params.sQuery Allow to filter on the option value
+   * Create a new Apikey
+   * The endpoint allows to create one or many elements at once.  The array can contain simple (Just the object) or compound (The object and its child) objects.  Creating compound elements allows to reduce the multiple requests to create all child objects.
+   * @param params.apikeyCreateObjectV1Request 
    */
-  async franchiseofficeGetAutocompleteV1(params: IFranchiseofficeGetAutocompleteV1Params): Promise<CommonGetAutocompleteV1Response> {
+  async apikeyCreateObjectV1(params: IApikeyCreateObjectV1Params): Promise<ApikeyCreateObjectV1Response> {
     // Verify required parameters are set
-    this.ensureParamIsSet('franchiseofficeGetAutocompleteV1', params, 'sSelector');
+    this.ensureParamIsSet('apikeyCreateObjectV1', params, 'apikeyCreateObjectV1Request');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/franchiseoffice/getAutocomplete/{sSelector}`
-      .replace(`{${'sSelector'}}`, encodeURIComponent(`${params['sSelector']}`));
+    const url = `${this.basePath}/1/object/apikey`;
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
-      .asGet()
-      // Set query parameters
-      .withParams({ 
-        'sQuery': params['sQuery'],
-      })
+      .asPost()
+      // Encode body parameter
+      .withHeader('content-type', 'application/json')
+      .withContent(JSON.stringify(params['apikeyCreateObjectV1Request'] || {}))
 
       // Authentication 'Authorization' required
       .withHeader('Authorization', this.authStorage.getAuthorization())

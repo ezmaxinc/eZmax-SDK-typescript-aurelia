@@ -4,6 +4,7 @@ Api.ts
 AuthStorage.ts
 ModuleUserApi.ts
 ObjectActivesessionApi.ts
+ObjectApikeyApi.ts
 ObjectEzsigndocumentApi.ts
 ObjectEzsignfolderApi.ts
 ObjectEzsignfoldersignerassociationApi.ts
