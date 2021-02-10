@@ -2,6 +2,7 @@
 .openapi-generator-ignore
 Api.ts
 AuthStorage.ts
+GlobalCustomerApi.ts
 ModuleUserApi.ts
 ObjectActivesessionApi.ts
 ObjectApikeyApi.ts

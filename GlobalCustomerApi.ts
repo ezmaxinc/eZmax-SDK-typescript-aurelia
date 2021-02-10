@@ -15,25 +15,25 @@ import { HttpClient } from 'aurelia-http-client';
 import { Api } from './Api';
 import { AuthStorage } from './AuthStorage';
 import {
-  CommonGetAutocompleteV1Response,
+  GlobalCustomerGetEndpointV1Response,
 } from './models';
 
 /**
- * periodGetAutocompleteV1 - parameters interface
+ * globalCustomerGetEndpointV1 - parameters interface
  */
-export interface IPeriodGetAutocompleteV1Params {
-  sSelector: 'ActiveNormal' | 'ActiveNormalAndEndOfYear' | 'AllNormal' | 'AllNormalAndEndOfYear';
-  sQuery?: string;
+export interface IGlobalCustomerGetEndpointV1Params {
+  pksCustomerCode: string;
+  sInfrastructureproductCode?: 'appcluster01' | 'ezsignuser';
 }
 
 /**
- * ObjectPeriodApi - API class
+ * GlobalCustomerApi - API class
  */
 @autoinject()
-export class ObjectPeriodApi extends Api {
+export class GlobalCustomerApi extends Api {
 
   /**
-   * Creates a new ObjectPeriodApi class.
+   * Creates a new GlobalCustomerApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.
@@ -43,25 +43,25 @@ export class ObjectPeriodApi extends Api {
   }
 
   /**
-   * Retrieve Periods and IDs
-   * Get the list of Periods to be used in a dropdown or autocomplete control.
-   * @param params.sSelector The types of Periods to return
-   * @param params.sQuery Allow to filter on the option value
+   * Get customer endpoint
+   * Retrieve the customer\&#39;s specific server endpoint where to send requests. This will help locate the proper region (ie: sInfrastructureregionCode) and the proper environment (ie: sInfrastructureenvironmenttypeDescription) where the customer\&#39;s data is stored.
+   * @param params.pksCustomerCode The customer code assigned to your account
+   * @param params.sInfrastructureproductCode The infrastructure product Code  If undefined, \&quot;appcluster01\&quot; is assumed
    */
-  async periodGetAutocompleteV1(params: IPeriodGetAutocompleteV1Params): Promise<CommonGetAutocompleteV1Response> {
+  async globalCustomerGetEndpointV1(params: IGlobalCustomerGetEndpointV1Params): Promise<GlobalCustomerGetEndpointV1Response> {
     // Verify required parameters are set
-    this.ensureParamIsSet('periodGetAutocompleteV1', params, 'sSelector');
+    this.ensureParamIsSet('globalCustomerGetEndpointV1', params, 'pksCustomerCode');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/period/getAutocomplete/{sSelector}`
-      .replace(`{${'sSelector'}}`, encodeURIComponent(`${params['sSelector']}`));
+    const url = `${this.basePath}/1/customer/{pksCustomerCode}/endpoint`
+      .replace(`{${'pksCustomerCode'}}`, encodeURIComponent(`${params['pksCustomerCode']}`));
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
       .asGet()
       // Set query parameters
       .withParams({ 
-        'sQuery': params['sQuery'],
+        'sInfrastructureproductCode': params['sInfrastructureproductCode'],
       })
 
       // Authentication 'Authorization' required
