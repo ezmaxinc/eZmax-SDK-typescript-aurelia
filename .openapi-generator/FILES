@@ -3,6 +3,7 @@
 Api.ts
 AuthStorage.ts
 GlobalCustomerApi.ts
+ModuleSsprApi.ts
 ModuleUserApi.ts
 ObjectActivesessionApi.ts
 ObjectApikeyApi.ts

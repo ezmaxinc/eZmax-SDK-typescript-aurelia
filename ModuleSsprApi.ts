@@ -15,25 +15,22 @@ import { HttpClient } from 'aurelia-http-client';
 import { Api } from './Api';
 import { AuthStorage } from './AuthStorage';
 import {
-  CommonGetAutocompleteV1Response,
 } from './models';
 
 /**
- * franchisebrokerGetAutocompleteV1 - parameters interface
+ * ssprRemindUsernamesV1 - parameters interface
  */
-export interface IFranchisebrokerGetAutocompleteV1Params {
-  sSelector: 'Active' | 'All';
-  sQuery?: string;
+export interface ISsprRemindUsernamesV1Params {
 }
 
 /**
- * ObjectFranchisebrokerApi - API class
+ * ModuleSsprApi - API class
  */
 @autoinject()
-export class ObjectFranchisebrokerApi extends Api {
+export class ModuleSsprApi extends Api {
 
   /**
-   * Creates a new ObjectFranchisebrokerApi class.
+   * Creates a new ModuleSsprApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.
@@ -43,26 +40,18 @@ export class ObjectFranchisebrokerApi extends Api {
   }
 
   /**
-   * Retrieve Franchisebrokers and IDs
-   * Get the list of Franchisebrokers to be used in a dropdown or autocomplete control.
-   * @param params.sSelector The type of Franchisebrokers to return
-   * @param params.sQuery Allow to filter on the option value
+   * Remind of forgotten username(s)
+   * This endpoint returns an email with the username(s) matching the email address provided in case of forgotten username
    */
-  async franchisebrokerGetAutocompleteV1(params: IFranchisebrokerGetAutocompleteV1Params): Promise<CommonGetAutocompleteV1Response> {
+  async ssprRemindUsernamesV1(): Promise<any> {
     // Verify required parameters are set
-    this.ensureParamIsSet('franchisebrokerGetAutocompleteV1', params, 'sSelector');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/franchisebroker/getAutocomplete/{sSelector}`
-      .replace(`{${'sSelector'}}`, encodeURIComponent(`${params['sSelector']}`));
+    const url = `${this.basePath}/1/module/sspr/remindUsernames`;
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
-      .asGet()
-      // Set query parameters
-      .withParams({ 
-        'sQuery': params['sQuery'],
-      })
+      .asPost()
 
       // Authentication 'Authorization' required
       .withHeader('Authorization', this.authStorage.getAuthorization())

@@ -1,6 +1,6 @@
 {
   "name": "ezmax-sdk-typescript-aurelia",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "license": "Unlicense",
   "main": "./dist/Api.js",
   "browser": "./dist/Api.js",
