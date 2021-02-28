@@ -1540,6 +1540,11 @@ export type FieldEPhoneType = 'Local' | 'International';
 export type FieldEUserType = 'AgentBroker' | 'Assistant' | 'Attendance' | 'Customer' | 'Employee' | 'Ezcom' | 'EzsignSigner' | 'EzsignUser' | 'FranchiseCustomerServer' | 'Normal' | 'RewardAdministration' | 'RewardMember' | 'RewardRepresentative' | 'RewardCustomer' | 'RewardDistributorServer' | 'Supplier' | 'VetrxCustomer' | 'Vetrxcustomergroup' | 'VetrxCustomerServer' | 'VetrxManufacturer' | 'VetrxVendor';
 
 /**
+ * The user type of the User for SSPR
+ */
+export type FieldEUserTypeSSPR = 'EzsignUser' | 'Native';
+
+/**
  * Request for the /1/object/franchisereferalincome/createObject API Request
  */
 export interface FranchisereferalincomeCreateObjectV1Request {
@@ -1722,6 +1727,130 @@ export interface PhoneRequest {
    * The extension of the phone number.  The extension is the \"123\" section in this sample phone number: (514) 990-1516 x123.  It can also be used with international phone numbers
    */
   sPhoneExtension?: string;
+}
+
+
+/**
+ * Request for the /1/module/sspr/resetPasswordRequest API Request
+ */
+export interface SsprResetPasswordRequestV1Request {
+  /**
+   * The customer code assigned to your account
+   */
+  pksCustomerCode: string;
+  /**
+   * The unique ID of the Language.  Valid values:  |Value|Description| |-|-| |1|French| |2|English|
+   */
+  fkiLanguageID: number;
+  eUserTypeSSPR: FieldEUserTypeSSPR;
+  /**
+   * The email address.
+   */
+  sEmailAddress?: string;
+  /**
+   * The Login name of the User.
+   */
+  sUserLoginname?: string;
+}
+
+
+/**
+ * Request for the /1/module/sspr/resetPassword API Request
+ */
+export interface SsprResetPasswordV1Request {
+  /**
+   * The customer code assigned to your account
+   */
+  pksCustomerCode: string;
+  /**
+   * The unique ID of the Language.  Valid values:  |Value|Description| |-|-| |1|French| |2|English|
+   */
+  fkiLanguageID: number;
+  eUserTypeSSPR: FieldEUserTypeSSPR;
+  /**
+   * The email address.
+   */
+  sEmailAddress?: string;
+  /**
+   * The Login name of the User.
+   */
+  sUserLoginname?: string;
+  /**
+   * Hex Encoded Secret SSPR token
+   */
+  binUserSSPRtoken: string;
+}
+
+
+/**
+ * Request for the /1/module/sspr/sendUsernames API Request
+ */
+export interface SsprSendUsernamesV1Request {
+  /**
+   * The customer code assigned to your account
+   */
+  pksCustomerCode: string;
+  /**
+   * The unique ID of the Language.  Valid values:  |Value|Description| |-|-| |1|French| |2|English|
+   */
+  fkiLanguageID: number;
+  eUserTypeSSPR: FieldEUserTypeSSPR;
+  /**
+   * The email address.
+   */
+  sEmailAddress: string;
+}
+
+
+/**
+ * Request for the /1/module/sspr/unlockAccountRequest API Request
+ */
+export interface SsprUnlockAccountRequestV1Request {
+  /**
+   * The customer code assigned to your account
+   */
+  pksCustomerCode: string;
+  /**
+   * The unique ID of the Language.  Valid values:  |Value|Description| |-|-| |1|French| |2|English|
+   */
+  fkiLanguageID: number;
+  eUserTypeSSPR: FieldEUserTypeSSPR;
+  /**
+   * The email address.
+   */
+  sEmailAddress?: string;
+  /**
+   * The Login name of the User.
+   */
+  sUserLoginname?: string;
+}
+
+
+/**
+ * Request for the /1/module/sspr/unlockAccount API Request
+ */
+export interface SsprUnlockAccountV1Request {
+  /**
+   * The customer code assigned to your account
+   */
+  pksCustomerCode: string;
+  /**
+   * The unique ID of the Language.  Valid values:  |Value|Description| |-|-| |1|French| |2|English|
+   */
+  fkiLanguageID: number;
+  eUserTypeSSPR: FieldEUserTypeSSPR;
+  /**
+   * The email address.
+   */
+  sEmailAddress?: string;
+  /**
+   * The Login name of the User.
+   */
+  sUserLoginname?: string;
+  /**
+   * Hex Encoded Secret SSPR token
+   */
+  binUserSSPRtoken: string;
 }
 
 
