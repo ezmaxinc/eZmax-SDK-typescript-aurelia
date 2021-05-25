@@ -15,25 +15,26 @@ import { HttpClient } from 'aurelia-http-client';
 import { Api } from './Api';
 import { AuthStorage } from './AuthStorage';
 import {
-  CommonGetAutocompleteV1Response,
+  AuthenticateAuthenticateV2Request,
+  AuthenticateAuthenticateV2Response,
 } from './models';
 
 /**
- * franchisebrokerGetAutocompleteV1 - parameters interface
+ * authenticateAuthenticateV2 - parameters interface
  */
-export interface IFranchisebrokerGetAutocompleteV1Params {
-  sSelector: 'Active' | 'All';
-  sQuery?: string;
+export interface IAuthenticateAuthenticateV2Params {
+  eSessionType: 'ezsignuser';
+  authenticateAuthenticateV2Request: AuthenticateAuthenticateV2Request;
 }
 
 /**
- * ObjectFranchisebrokerApi - API class
+ * ModuleAuthenticateApi - API class
  */
 @autoinject()
-export class ObjectFranchisebrokerApi extends Api {
+export class ModuleAuthenticateApi extends Api {
 
   /**
-   * Creates a new ObjectFranchisebrokerApi class.
+   * Creates a new ModuleAuthenticateApi class.
    *
    * @param httpClient The Aurelia HTTP client to be injected.
    * @param authStorage A storage for authentication data.
@@ -43,26 +44,26 @@ export class ObjectFranchisebrokerApi extends Api {
   }
 
   /**
-   * Retrieve Franchisebrokers and IDs
-   * Get the list of Franchisebrokers to be used in a dropdown or autocomplete control.
-   * @param params.sSelector The type of Franchisebrokers to return
-   * @param params.sQuery Allow to filter on the option value
+   * Authenticate a user
+   * This endpoint authenticates a user.
+   * @param params.eSessionType 
+   * @param params.authenticateAuthenticateV2Request 
    */
-  async franchisebrokerGetAutocompleteV1(params: IFranchisebrokerGetAutocompleteV1Params): Promise<CommonGetAutocompleteV1Response> {
+  async authenticateAuthenticateV2(params: IAuthenticateAuthenticateV2Params): Promise<AuthenticateAuthenticateV2Response> {
     // Verify required parameters are set
-    this.ensureParamIsSet('franchisebrokerGetAutocompleteV1', params, 'sSelector');
+    this.ensureParamIsSet('authenticateAuthenticateV2', params, 'eSessionType');
+    this.ensureParamIsSet('authenticateAuthenticateV2', params, 'authenticateAuthenticateV2Request');
 
     // Create URL to call
-    const url = `${this.basePath}/1/object/franchisebroker/getAutocomplete/{sSelector}`
-      .replace(`{${'sSelector'}}`, encodeURIComponent(`${params['sSelector']}`));
+    const url = `${this.basePath}/2/module/authenticate/authenticate/ezsignuser/{eSessionType}`
+      .replace(`{${'eSessionType'}}`, encodeURIComponent(`${params['eSessionType']}`));
 
     const response = await this.httpClient.createRequest(url)
       // Set HTTP method
-      .asGet()
-      // Set query parameters
-      .withParams({ 
-        'sQuery': params['sQuery'],
-      })
+      .asPost()
+      // Encode body parameter
+      .withHeader('content-type', 'application/json')
+      .withContent(JSON.stringify(params['authenticateAuthenticateV2Request'] || {}))
 
       // Authentication 'Authorization' required
       .withHeader('Authorization', this.authStorage.getAuthorization())
